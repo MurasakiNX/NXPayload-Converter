@@ -11,7 +11,7 @@ If you have any problem with NXPayload Converter, we will help you on the Discor
 
 # ❓ How can I use the program ?
 
-- Download the latest version of <a href="https://github.com/MurasakiNX/NXPayload-Converter/releases">NXPayload Converter.exe</a>
+- Download the latest version of <a href="https://github.com/MurasakiNX/NXPayload-Converter/releases">NXPayload Converter</a>
 - Place the executable and your .bin files in the same folder
 - Run the program
 
