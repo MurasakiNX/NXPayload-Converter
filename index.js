@@ -25,13 +25,6 @@ const colors = {
     'error'  : (text) => { return `\x1b[38;2;118;1;1m${text}\x1b[39m` }
 };
 
-function exit() {
-    console.log(colors.default('\n[EXIT] - Press any key to exit'));
-    process.stdin.setRawMode(true);
-    process.stdin.resume();
-    process.stdin.on('data', process.exit.bind(process, 0));
-};
-
 (async () => {
     try {
         console.clear();
@@ -49,8 +42,7 @@ function exit() {
         const bins = readdirSync('./').filter(f => f.endsWith('.bin'));
 
         if (bins.length == 0) {
-            console.log(colors.warning('[WARNING] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
-            return exit();
+            return console.log(colors.warning('[WARNING] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
         };
 
         if (!existsSync('./generated')) {
@@ -62,8 +54,7 @@ function exit() {
 
         for (bin of bins) {
             console.log(colors.default(`[${++i}/${bins.length}] - Creating boot.dat file from ${bin}`));
-            if (!existsSync(`./generated/${bin}`))
-                mkdirSync(`./generated/${bin}`);
+            if (!existsSync(`./generated/${bin}`)) mkdirSync(`./generated/${bin}`);
             writeFileSync(`./generated/${bin}/boot.dat`, await createBootDat(readFileSync(bin)));
             console.log(colors.success(`[BOOT.DAT] - ${bin} has just been generated!\n`));
         };
@@ -72,5 +63,9 @@ function exit() {
     } catch (e) {
         console.log(colors.error(`[ERROR] - An error has occured: ${e.stack}`));
     };
-    exit();
 })();
+
+console.log(colors.default('\n[EXIT] - Press any key to exit'));
+process.stdin.setRawMode(true);
+process.stdin.resume();
+process.stdin.on('data', process.exit.bind(process, 0));
