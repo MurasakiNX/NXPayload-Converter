@@ -53,7 +53,8 @@ const colors = {
 
         for (bin of bins) {
             console.log(colors.default(`[${++i}/${bins.length}] - Creating boot.dat file from ${bin}`));
-            writeFileSync(`./generated/${bin}_boot.dat`, await createBootDat(readFileSync(bin)));
+            mkdirSync(`./generated/${bin}`);
+            writeFileSync(`./generated/${bin}/boot.dat`, await createBootDat(readFileSync(bin)));
             console.log(colors.success(`[BOOT.DAT] - ${bin}_boot.dat has just been generated!\n`));
         };
 
