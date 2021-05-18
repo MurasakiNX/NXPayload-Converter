@@ -17,7 +17,7 @@ The corresponding files will be generated into the generated folder
 - Download the latest version of <a href="https://nodejs.org/en/">Node.js</a>
 - Clone the project or download the .zip
 - Unzip it
-- Launch the cmd in the root of the project
+- Launch the cmd in the root of the project and run
 
 ```
 npm install --save nexe
