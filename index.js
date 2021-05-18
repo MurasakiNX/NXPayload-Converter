@@ -25,6 +25,13 @@ const colors = {
     'error'  : (text) => { return `\x1b[38;2;118;1;1m${text}\x1b[39m` }
 };
 
+function exit() {
+    console.log(colors.default('\n[EXIT] - Press any key to exit'));
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.on('data', process.exit.bind(process, 0));
+};
+
 (async () => {
     try {
         console.clear();
@@ -42,7 +49,8 @@ const colors = {
         const bins = readdirSync('./').filter(f => f.endsWith('.bin'));
 
         if (bins.length == 0) {
-            return console.log(colors.warning('[WARNING] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
+            console.log(colors.warning('[WARNING] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
+            return exit();
         };
 
         if (!existsSync('./generated')) {
@@ -63,9 +71,5 @@ const colors = {
     } catch (e) {
         console.log(colors.error(`[ERROR] - An error has occured: ${e.stack}`));
     };
+    exit();
 })();
-
-console.log(colors.default('\n[EXIT] - Press any key to exit'));
-process.stdin.setRawMode(true);
-process.stdin.resume();
-process.stdin.on('data', process.exit.bind(process, 0));
