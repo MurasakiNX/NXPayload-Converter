@@ -3,6 +3,7 @@
 <img src="https://github.com/MurasakiNX/NXPayload-Converter/blob/main/NXPayload%20Converter.png?raw=true">
 
 NXPayload Converter is a program that allows you to create boot.dat files from Nintendo Switch payload files (.bin)
+
 If you have any problem with NXPayload Converter, we will help you on the Discord (English and French)
 
 [![Discord](https://img.shields.io/discord/643436008452521984.svg?logo=discord&logoColor=white&label=Discord&color=7289DA
