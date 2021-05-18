@@ -55,14 +55,15 @@ function exit() {
 
         if (!existsSync('./generated')) {
             mkdirSync('./generated');
-            console.log(colors.default('\n[INFO] - The generated folder has just been created'));
+            console.log(colors.default('[INFO] - The generated folder has just been created\n'));
         };
 
         let i = 0;
 
         for (bin of bins) {
             console.log(colors.default(`[${++i}/${bins.length}] - Creating boot.dat file from ${bin}`));
-            mkdirSync(`./generated/${bin}`);
+            if (!existsSync(`./generated/${bin}`))
+                mkdirSync(`./generated/${bin}`);
             writeFileSync(`./generated/${bin}/boot.dat`, await createBootDat(readFileSync(bin)));
             console.log(colors.success(`[BOOT.DAT] - ${bin} has just been generated!\n`));
         };
