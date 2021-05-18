@@ -1,5 +1,6 @@
 const { readdirSync, writeFileSync, readFileSync, existsSync, mkdirSync } = require('fs');
 const { createHash } = require('crypto');
+const process = require('process');
 
 async function createBootDat(payload) {
     let header = Buffer.allocUnsafe(0xE0);
@@ -24,6 +25,13 @@ const colors = {
     'error'  : (text) => { return `\x1b[38;2;118;1;1m${text}\x1b[39m` }
 };
 
+function exit() {
+    console.log(colors.default('\n[EXIT] - Press any key to exit'));
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.on('data', process.exit.bind(process, 0));
+};
+
 (async () => {
     try {
         console.clear();
@@ -41,12 +49,13 @@ const colors = {
         const bins = readdirSync('./').filter(f => f.endsWith('.bin'));
 
         if (bins.length == 0) {
-            return console.log(colors.warning('[WARNING] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
+            console.log(colors.warning('[WARNING] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
+            return exit();
         };
 
         if (!existsSync('./generated')) {
             mkdirSync('./generated');
-            console.log(colors.default('\n[Info] - The generated folder has just been created'));
+            console.log(colors.default('\n[INFO] - The generated folder has just been created'));
         };
 
         let i = 0;
@@ -58,8 +67,9 @@ const colors = {
             console.log(colors.success(`[BOOT.DAT] - ${bin} has just been generated!\n`));
         };
 
-        console.log(colors.success('[SUCCESS] - All Nintendo Switch payload files (.bin) have been converted to boot.dat in the generated folder.'));
+        console.log(colors.success('[SUCCESS] - All Nintendo Switch payload files (.bin) have been converted to boot.dat in the generated folder'));
     } catch (e) {
-        console.log(colors.error(`[ERROR] - An error has occured: ${e.stack}.`));
+        console.log(colors.error(`[ERROR] - An error has occured: ${e.stack}`));
     };
+    exit();
 })();
