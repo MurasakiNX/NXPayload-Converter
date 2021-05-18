@@ -55,7 +55,7 @@ const colors = {
             console.log(colors.default(`[${++i}/${bins.length}] - Creating boot.dat file from ${bin}`));
             mkdirSync(`./generated/${bin}`);
             writeFileSync(`./generated/${bin}/boot.dat`, await createBootDat(readFileSync(bin)));
-            console.log(colors.success(`[BOOT.DAT] - ${bin}_boot.dat has just been generated!\n`));
+            console.log(colors.success(`[BOOT.DAT] - boot.dat (${bin}) has just been generated!\n`));
         };
 
         console.log(colors.success('[SUCCESS] - All Nintendo Switch payload files (.bin) have been converted to boot.dat in the generated folder.'));
