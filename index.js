@@ -1,4 +1,4 @@
-const { readdirSync, writeFileSync, readFileSync, existsSync, mkdirSync } = require('fs');
+const { readdirSync, writeFileSync, readFileSync, existsSync, mkdirSync, statSync } = require('fs');
 const { createHash } = require('crypto');
 const process = require('process');
 
@@ -61,13 +61,23 @@ function exit() {
         let i = 0;
 
         for (bin of bins) {
+            let fileSize = statSync(bin).size;
+
+            if (fileSize == 0) {
+                console.log(colors.error(`[ERROR] - ${bin} is an empty file\n`));
+                continue;
+            } else if (fileSize > 256000) {
+                console.log(colors.error(`[ERROR] - ${bin} is a file larger than 256kB\n`));
+                continue;
+            };
+
             console.log(colors.default(`[${++i}/${bins.length}] - Creating boot.dat file from ${bin}`));
             if (!existsSync(`./generated/${bin}`)) mkdirSync(`./generated/${bin}`);
             writeFileSync(`./generated/${bin}/boot.dat`, await createBootDat(readFileSync(bin)));
             console.log(colors.success(`[BOOT.DAT] - ${bin} has just been generated!\n`));
         };
 
-        console.log(colors.success('[SUCCESS] - All Nintendo Switch payload files (.bin) have been converted to boot.dat in the generated folder'));
+        console.log(colors.success('[SUCCESS] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder'));
     } catch (e) {
         console.log(colors.error(`[ERROR] - An error has occured: ${e.stack}`));
     };
