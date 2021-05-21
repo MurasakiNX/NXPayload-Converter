@@ -1,4 +1,4 @@
-const { readdirSync, writeFileSync, readFileSync, existsSync, mkdirSync, statSync } = require('fs');
+const { readdirSync, writeFileSync, readFileSync, existsSync, mkdirSync, statSync, unlinkSync } = require('fs');
 const { createHash } = require('crypto');
 const process = require('process');
 
@@ -43,7 +43,7 @@ function exit() {
  | |\\  |/ /^\\ \\| | | (_| | |_| | | (_) | (_| | (_| | | \\__/\\ (_) | | | \\ V /  __/ |  | ||  __/ |   
  \\_| \\_/\\/   \\/\\_|  \\__,_|\\__, |_|\\___/ \\__,_|\\__,_|  \\____/\\___/|_| |_|\\_/ \\___|_|   \\__\\___|_|   
                            __/ |                                                                   
-                          |___/                                             v1.0.2 By MurasakiNX                                                            
+                          |___/                                     v1.0.3 By MurasakiNX & Zoria                                                          
         `));
 
         const bins = readdirSync('./').filter(f => f.endsWith('.bin'));
@@ -54,6 +54,10 @@ function exit() {
         };
 
         if (!existsSync('./generated')) {
+            mkdirSync('./generated');
+            console.log(colors.default('[INFO] - The generated folder has just been created\n'));
+        } else if (existsSync('./generated') && statSync('./generated').isFile()) {
+            unlinkSync('./generated');
             mkdirSync('./generated');
             console.log(colors.default('[INFO] - The generated folder has just been created\n'));
         };
