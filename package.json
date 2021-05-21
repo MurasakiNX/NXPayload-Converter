@@ -1,6 +1,6 @@
 {
   "name": "NXPayload-Converter",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "NXPayload Converter is a program that allows you to create boot.dat files from Nintendo Switch payload files (.bin)",
   "main": "index.js",
   "repository": "https://github.com/MurasakiNX/NXPayload-Converter.git",
