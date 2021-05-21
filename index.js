@@ -1,6 +1,7 @@
 const { readdirSync, writeFileSync, readFileSync, existsSync, mkdirSync, statSync, unlinkSync } = require('fs');
 const { createHash } = require('crypto');
 const process = require('process');
+const fetch = require('node-fetch');
 
 async function createBootDat(payload) {
     let header = Buffer.allocUnsafe(0xE0);
@@ -43,47 +44,92 @@ function exit() {
  | |\\  |/ /^\\ \\| | | (_| | |_| | | (_) | (_| | (_| | | \\__/\\ (_) | | | \\ V /  __/ |  | ||  __/ |   
  \\_| \\_/\\/   \\/\\_|  \\__,_|\\__, |_|\\___/ \\__,_|\\__,_|  \\____/\\___/|_| |_|\\_/ \\___|_|   \\__\\___|_|   
                            __/ |                                                                   
-                          |___/                                     v1.0.3 By MurasakiNX & Zoria                                                          
+                          |___/                                     v1.1.0 By MurasakiNX & Zoria                                                          
         `));
 
         const bins = readdirSync('./').filter(f => f.endsWith('.bin'));
 
         if (bins.length == 0) {
-            console.log(colors.warning('[WARNING] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
+            console.log(colors.warning('[NO BINS] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
             return exit();
         };
 
-        if (!existsSync('./generated')) {
-            mkdirSync('./generated');
-            console.log(colors.default('[INFO] - The generated folder has just been created\n'));
-        } else if (existsSync('./generated') && statSync('./generated').isFile()) {
-            unlinkSync('./generated');
-            mkdirSync('./generated');
-            console.log(colors.default('[INFO] - The generated folder has just been created\n'));
+        if (!existsSync('generated')) {
+            mkdirSync('generated');
+            console.log(colors.default('[GENERATED FOLDER] - The generated folder has just been created\n'));
+        } else if (existsSync('generated') && statSync('./generated').isFile()) {
+            unlinkSync('generated');
+            mkdirSync('generated');
+            console.log(colors.default('[GENERATED FOLDER] - The generated folder has just been created\n'));
         };
 
         let i = 0;
+
+        if (existsSync('links.txt') && statSync('links.txt').isFile()) {
+            let links = readFileSync('links.txt', 'utf8').split(',');
+            if (links.join('') == '')
+                console.log(colors.warning('[NO LINKS] - links.txt is an empty file'));
+            else {
+                links = Array.from(new Set(links)); // Removes duplicate links
+
+                for (let link of links) {
+                    try {
+                        link = new URL(link).href;
+                        let file = await fetch(link).then(res => res);
+
+                        if (file.headers.get('content-disposition')) {
+                            let fileName = file.headers.get('content-disposition').split('filename=')[1].split(';')[0];
+                            if (!fileName.endsWith('.bin')) {
+                                console.log(colors.error(`[NOT BIN] - ${fileName} is not a .bin file\n`));
+                                continue;
+                            } else if (file.headers.get('content-length') == 0) {
+                                console.log(colors.error(`[EMPTY FILE] - ${fileName} is an empty file\n`));
+                                continue;
+                            } else if (file.headers.get('content-length') > 256000) {
+                                console.log(colors.error(`[TOO BIG FILE] - ${fileName} is a file larger than 256kB\n`));
+                                continue;
+                            };
+
+                            console.log(colors.default(`[${++i}/${links.length}] - Creating boot.dat file from ${fileName}`));
+                            if (!existsSync(`generated/online_${fileName}`)) mkdirSync(`generated/online_${fileName}`);
+                            writeFileSync(`generated/online_${fileName}/boot.dat`, await createBootDat(await file.buffer()));
+                            console.log(colors.success(`[BOOT.DAT ONLINE] - ${fileName} has just been generated\n`));
+                        } else
+                            console.log(colors.error(`[UNVALID LINK] - ${link} is not a file link\n`));
+                    } catch (e) {
+                        if (e.input || e.code == 'ENOTFOUND')
+                            console.log(colors.error(`[UNVALID LINK] - ${link} is not a valid link or you are not connected to the Internet\n`));
+                        else {
+                            console.log(colors.error(`[ONLINE ERROR] - An error has occured: ${e.stack}\n`));
+                            break;
+                        };
+                    };
+                };
+            };
+        };
+
+        i = 0;
 
         for (bin of bins) {
             let fileSize = statSync(bin).size;
 
             if (fileSize == 0) {
-                console.log(colors.error(`[ERROR] - ${bin} is an empty file\n`));
+                console.log(colors.error(`[EMPTY FILE] - ${bin} is an empty file\n`));
                 continue;
             } else if (fileSize > 256000) {
-                console.log(colors.error(`[ERROR] - ${bin} is a file larger than 256kB\n`));
+                console.log(colors.error(`[TOO BIG FILE] - ${bin} is a file larger than 256kB\n`));
                 continue;
             };
 
             console.log(colors.default(`[${++i}/${bins.length}] - Creating boot.dat file from ${bin}`));
-            if (!existsSync(`./generated/${bin}`)) mkdirSync(`./generated/${bin}`);
-            writeFileSync(`./generated/${bin}/boot.dat`, await createBootDat(readFileSync(bin)));
-            console.log(colors.success(`[BOOT.DAT] - ${bin} has just been generated!\n`));
+            if (!existsSync(`generated/local_${bin}`)) mkdirSync(`generated/local_${bin}`);
+            writeFileSync(`generated/local_${bin}/boot.dat`, await createBootDat(readFileSync(bin)));
+            console.log(colors.success(`[BOOT.DAT LOCAL] - ${bin} has just been generated\n`));
         };
 
-        console.log(colors.success('[SUCCESS] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder'));
+        console.log(colors.success('[DONE] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder'));
     } catch (e) {
-        console.log(colors.error(`[ERROR] - An error has occured: ${e.stack}`));
+        console.log(colors.error(`[LOCAL ERROR] - An error has occured: ${e.stack}`));
     };
     exit();
 })();

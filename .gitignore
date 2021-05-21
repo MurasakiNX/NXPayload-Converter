@@ -112,3 +112,9 @@ dist
 # Generated .dat files
 generated
 *.dat
+
+# Yarn
+yarn.lock
+
+# Links file
+links.txt
