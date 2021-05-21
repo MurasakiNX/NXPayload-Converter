@@ -99,8 +99,7 @@ function exit() {
                     };
                 };
             };
-
-            console.log(colors.success('[DONE ONLINE] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder\n'));
+            console.log(colors.success('[ONLINE DONE] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder\n'));
         };
 
         i = 0;
@@ -128,8 +127,7 @@ function exit() {
             writeFileSync(`generated/local_${bin}/boot.dat`, await createBootDat(readFileSync(bin)));
             console.log(colors.success(`[BOOT.DAT LOCAL] - ${bin} has just been generated\n`));
         };
-
-        console.log(colors.success('[DONE LOCAL] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder'));
+        console.log(colors.success('[LOCAL DONE] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder'));
     } catch (e) {
         console.log(colors.error(`[LOCAL ERROR] - An error has occured: ${e.stack}`));
     };
