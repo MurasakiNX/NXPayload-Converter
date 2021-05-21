@@ -47,13 +47,6 @@ function exit() {
                           |___/                                     v1.1.0 By MurasakiNX & Zoria                                                          
         `));
 
-        const bins = readdirSync('./').filter(f => f.endsWith('.bin'));
-
-        if (bins.length == 0) {
-            console.log(colors.warning('[NO BINS] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
-            return exit();
-        };
-
         if (!existsSync('generated')) {
             mkdirSync('generated');
             console.log(colors.default('[GENERATED FOLDER] - The generated folder has just been created\n'));
@@ -109,6 +102,13 @@ function exit() {
         };
 
         i = 0;
+
+        const bins = readdirSync('./').filter(f => f.endsWith('.bin'));
+
+        if (bins.length == 0) {
+            console.log(colors.warning('[NO BINS] - Please make sure that your Nintendo Switch payload files (.bin) are in the same folder as the executable'));
+            return exit();
+        };
 
         for (bin of bins) {
             let fileSize = statSync(bin).size;
