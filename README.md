@@ -31,12 +31,11 @@ node build/buildscript.js
 
 # 👨‍💻 Developers
 - <a href="https://github.com/MurasakiNX">MurasakiNX</a>
-- <a href="https://github.com/THZoria">Zoria</a> 
+- <a href="https://github.com/THZoria">Zoria</a>  
 
 # ⭐ Credits
 
 - <a href="https://www.flaticon.com/authors/flat-icons">Flat Icons - Author of the rocket icon</a>
 - <a href="https://gist.github.com/CTCaer/13c02c05daec9e674ba00ce5ac35f5be">CTCaer - Author of the original script written in Python</a>
 - <a href="https://github.com/Pharuxtan">Pharuxtan - Author of the conversion of the original script to JavaScript</a> 
-
-
+- Zoria's rabbit ( ͡° ͜ʖ ͡°)
