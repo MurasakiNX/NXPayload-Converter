@@ -29,7 +29,7 @@ npm install --save nexe
 node build/buildscript.js
 ```
 
-# 👑 Authors
+# 👨‍💻 Developers
 - <a href="https://github.com/MurasakiNX">MurasakiNX</a>
 - <a href="https://github.com/THZoria">Zoria</a> 
 
