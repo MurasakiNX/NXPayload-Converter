@@ -29,6 +29,10 @@ npm install --save nexe
 node build/buildscript.js
 ```
 
+# 👑 Authors
+- <a href="https://github.com/MurasakiNX">MurasakiNX</a>
+- <a href="https://github.com/THZoria">Zoria</a> 
+
 # ⭐ Credits
 
 - <a href="https://www.flaticon.com/authors/flat-icons">Flat Icons - Author of the rocket icon</a>
