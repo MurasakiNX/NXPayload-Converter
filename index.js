@@ -59,9 +59,9 @@ function exit() {
         let i = 0;
 
         if (existsSync('links.txt') && statSync('links.txt').isFile()) {
-            let links = readFileSync('links.txt', 'utf8').split(',');
+            let links = readFileSync('links.txt', 'utf8').trim().split(',');
             if (links.join('') == '')
-                console.log(colors.warning('[NO LINKS] - links.txt is an empty file'));
+                console.log(colors.warning('[NO LINKS] - links.txt is an empty file\n'));
             else {
                 links = Array.from(new Set(links)); // Removes duplicate links
 
@@ -97,9 +97,9 @@ function exit() {
                             break;
                         };
                     };
+                    console.log(colors.success('[ONLINE DONE] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder\n'));
                 };
             };
-            console.log(colors.success('[ONLINE DONE] - All Nintendo Switch payload files that did not display an error (.bin) have been converted to boot.dat in the generated folder\n'));
         };
 
         i = 0;
