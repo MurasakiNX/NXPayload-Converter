@@ -1,0 +1,11 @@
+{
+    "fusee-primary": {
+        "latest": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/fusee-primary/fusee-primary@latest.bin?raw=true",
+        "0.19.3": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/fusee-primary/fusee-primary@0.19.3.bin?raw=true"
+    },
+
+    "hekate": {
+        "latest": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/hekate/hekate@latest.bin?raw=true",
+        "5.5.6": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/hekate/hekate@5.5.6.bin?raw=true"
+    }
+}
