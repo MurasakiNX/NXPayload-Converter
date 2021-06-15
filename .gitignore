@@ -107,7 +107,7 @@ dist
 .tern-port
 
 # Bin files
-*.bin
+/*.bin
 
 # Generated .dat files
 generated
