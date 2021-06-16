@@ -29,6 +29,17 @@ npm install --save nexe
 node build/buildscript.js
 ```
 
+# NXPayload Converter Keys ONLY ON 1.2.0+ 🔑
+
+- Lockpick RCM (lockpick_rcm)
+- Atmosphère fusee-primary (fusee-primary)
+- Hekate (hekate)
+
+You can put direct links of .bin files in a links.txt and also put keys as above to get the bin of the latest version of a payload or a specific version (name@version) @latest or just the name for the latest version. Links must be separated by commas.
+
+<img src="https://cdn.discordapp.com/attachments/854140642673819668/854516245310341160/unknown.png">
+Here I get a fusee-primary.bin by a direct link, the latest version of fusee-primary, the other way to get the latest version for hekate and a specific version, the 1.9.0 of Lockpick RCM by the keys indicated above.
+
 # 👨‍💻 Developers
 - <a href="https://github.com/MurasakiNX">MurasakiNX</a>
 - <a href="https://github.com/THZoria">Zoria</a>  
