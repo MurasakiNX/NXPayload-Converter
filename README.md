@@ -29,7 +29,7 @@ npm install --save nexe
 node build/buildscript.js
 ```
 
-# NXPayload Converter Keys ONLY ON 1.2.0+ 🔑
+# 🔑 NXPayload Converter Keys ONLY ON 1.2.0+ 
 
 - Lockpick RCM (lockpick_rcm)
 - Atmosphère fusee-primary (fusee-primary)
