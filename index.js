@@ -92,7 +92,7 @@ function exit() {
                             console.log(colors.error(`[UNVALID LINK] - ${link} is not a file link\n`));
                     } catch (e) {
                         if (e.input || e.code == 'ENOTFOUND') {
-                            const [githubFile, version = 'latest'] = link.trim().split('@');
+                            const [githubFile, version = 'latest'] = link.trim().toLowerCase().split('@');
                             if (binariesJSON[githubFile] && binariesJSON[githubFile][version]) {
                                 let file = await fetch(binariesJSON[githubFile][version]).then(res => res);
                                 console.log(colors.default(`[${++i}/${links.length}] - Creating boot.dat file from ${githubFile}@${version}`));
