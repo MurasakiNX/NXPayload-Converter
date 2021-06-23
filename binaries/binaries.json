@@ -12,5 +12,10 @@
     "lockpick_rcm": {
         "latest": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/lockpick_rcm/lockpick_rcm@latest.bin?raw=true",
         "1.9.0": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/lockpick_rcm/lockpick_rcm@1.9.0.bin?raw=true"
+    },
+
+    "biskeydump": {
+        "latest": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/biskeydump/biskeydump@latest.bin?raw=true",
+        "8": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/biskeydump/biskeydump@8.bin?raw=true"
     }
 }
