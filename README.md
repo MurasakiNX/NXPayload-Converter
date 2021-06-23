@@ -35,6 +35,7 @@ node build/buildscript.js
 - Atmosphère fusee-primary (fusee-primary)
 - Hekate (hekate)
 - Biskeydump (biskeydump)
+- TegraExplorer (tegraexplorer)
 
 You can put direct links of .bin files in a links.txt and also put keys as above to get the bin of the latest version of a payload or a specific version (name@version) @latest or just the name for the latest version. Links must be separated by commas.
 
