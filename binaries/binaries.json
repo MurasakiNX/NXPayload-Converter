@@ -17,5 +17,10 @@
     "biskeydump": {
         "latest": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/biskeydump/biskeydump@latest.bin?raw=true",
         "8": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/biskeydump/biskeydump@8.bin?raw=true"
+    },
+
+    "tegraexplorer": {
+        "latest": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/tegraexplorer/tegraexplorer@latest.bin?raw=true",
+        "3.0.4": "https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/tegraexplorer/tegraexplorer@3.0.4.bin?raw=true"
     }
 }
