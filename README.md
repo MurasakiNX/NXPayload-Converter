@@ -7,7 +7,7 @@ NXPayload Converter is a program that allows you to create boot.dat files from N
 If you have any problem with NXPayload Converter, we will help you on the Discord (English and French)
 
 [![Discord](https://img.shields.io/discord/643436008452521984.svg?logo=discord&logoColor=white&label=Discord&color=7289DA
-)](https://discord.gg/XRYzNKyc)
+)](https://discord.gg/6zRbG3FsJH)
 
 # ❓ How can I use the program ?
 
