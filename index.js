@@ -44,7 +44,7 @@ function exit() {
  | |\\  |/ /^\\ \\| | | (_| | |_| | | (_) | (_| | (_| | | \\__/\\ (_) | | | \\ V /  __/ |  | ||  __/ |   
  \\_| \\_/\\/   \\/\\_|  \\__,_|\\__, |_|\\___/ \\__,_|\\__,_|  \\____/\\___/|_| |_|\\_/ \\___|_|   \\__\\___|_|   
                            __/ |                                                                   
-                          |___/                                     v1.2.0 By MurasakiNX & Zoria                                                          
+                          |___/                                     v1.3.0 By MurasakiNX & Zoria                                                          
         `));
 
         if (!existsSync('generated')) {
@@ -64,7 +64,6 @@ function exit() {
                 console.log(colors.warning('[NO LINKS] - links.txt is an empty file\n'));
             else {
                 links = Array.from(new Set(links)); // Removes duplicate links
-                const binariesJSON = await fetch('https://raw.githubusercontent.com/MurasakiNX/NXPayload-Converter/main/binaries/binaries.json').then(res => res.json());
 
                 for (let link of links) {
                     try {
@@ -93,15 +92,15 @@ function exit() {
                     } catch (e) {
                         if (e.input || e.code == 'ENOTFOUND') {
                             const [githubFile, version = 'latest'] = link.trim().toLowerCase().split('@');
-                            if (binariesJSON[githubFile] && binariesJSON[githubFile][version]) {
-                                let file = await fetch(binariesJSON[githubFile][version]).then(res => res);
+                            const file = await fetch(`https://github.com/MurasakiNX/NXPayload-Converter/blob/main/binaries/${githubFile}/${githubFile}@${version}.bin?raw=true`);
+                            
+                            if (file.ok) {
                                 console.log(colors.default(`[${++i}/${links.length}] - Creating boot.dat file from ${githubFile}@${version}`));
                                 if (!existsSync(`generated/github_${githubFile}@${version}`)) mkdirSync(`generated/github_${githubFile}@${version}`);
                                 writeFileSync(`generated/github_${githubFile}@${version}/boot.dat`, await createBootDat(await file.buffer()));
                                 console.log(colors.success(`[BOOT.DAT GITHUB BINARIES] - ${githubFile}@${version} has just been generated\n`));
-                            } else {
+                            } else
                                 console.log(colors.error(`[UNVALID LINK] - ${link} is not a valid link or you are not connected to the Internet\n`));
-                            };
                         } else {
                             console.log(colors.error(`[ONLINE ERROR] - An error has occured: ${e.stack}\n`));
                             break;
@@ -143,4 +142,3 @@ function exit() {
     };
     exit();
 })();
-// SGkgRGVlamF5ODcgaWYgeW91IHJlYWQgdGhpcyBtZXNzYWdlIGtub3cgdGhhdCB0aGUgVGVhbSBQb3lvTlggbGlrZXMgeW91IGEgbG90IPCfmII=
