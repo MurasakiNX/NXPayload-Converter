@@ -49,7 +49,7 @@ _   _ __   ________           _                 _   _____                       
         mkdirSync(GENERATED_FOLDER);
     };
 
-    const links = Array.from(new Set([...readdirSync(process.cwd()).filter(f => f.endsWith('.bin') && statSync(f).isFile()), ...existsSync(LINKS_FILE) && statSync(LINKS_FILE).isFile() ? readFileSync('links.txt', 'utf8').trim().split(',') : []])).filter(link => link !== '');
+    const links = Array.from(new Set([...readdirSync(process.cwd()).filter(f => f.endsWith('.bin') && statSync(f).isFile()), ...existsSync(LINKS_FILE) && statSync(LINKS_FILE).isFile() ? readFileSync('links.txt', 'utf8').trim().split(',') : []])).filter(link => link.length);
 
     for (let link of links) {
         const index = links.indexOf(link) + 1;
