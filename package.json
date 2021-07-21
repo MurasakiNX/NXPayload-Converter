@@ -7,7 +7,6 @@
   "author": "Murasaki <matisu64@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "node-fetch": "^2.6.1",
-    "pkg": "^5.3.0"
+    "node-fetch": "^2.6.1"
   }
 }
